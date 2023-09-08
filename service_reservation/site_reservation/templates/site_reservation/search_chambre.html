@@ -1,0 +1,100 @@
+{% extends './base.html'%}
+{% load static %}
+{% block content %}
+
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center pb-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Chambres</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Reservation de Chambres</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Chambres</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Booking Start -->
+<div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="bg-white shadow" style="padding: 35px;">
+            <div class="row g-2">
+                <div class="col-md-10">
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option selected>Ou allez-vous ?</option>
+                                <option value="">Dakar</option>
+                                <option value="">Thiès</option>
+                                <option value="">Saint-Louis</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="date" id="date1" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input"
+                                    placeholder="Date de départ" data-target="#date1" data-toggle="datetimepicker" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="date" id="date2" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" placeholder="Date d'arrivée" data-target="#date2" data-toggle="datetimepicker"/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select">
+                                <option selected>Adulte</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select">
+                                <option selected>Enfant</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button id="re" class="btn btn-primary w-100">RECHERCHER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Booking End -->
+
+
+<!-- Room Start -->
+<div class="row">
+    {% for hotel in hotels %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{% static 'reservation/image/room-3.jpg' %}" alt="{{ hotel.marque }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ hotel.nom }}</h5>
+                    <p class="card-text">{{ hotel.adresse }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Non disponible</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<!-- Room End -->
+
+{% endblock %}
+
+
+      

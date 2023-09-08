@@ -1,0 +1,64 @@
+{% extends './base.html'%}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url({% static 'reservation/image/carousel-1.jpg' %});">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center pb-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Notre suite</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase" style="background-color: initial;">
+                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>                        
+                    <li class="breadcrumb-item"><a href="{% url 'contact'%}">Contact</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">suite</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Booking Start -->
+<div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+    </div>
+</div>
+<!-- Booking End -->
+
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <h6 class="section-title text-start text-primary text-uppercase">A propos de la suite</h6>
+                <h1 class="mb-4">{{ suite.nom_suite }}</h1>
+                <p class="mb-4">{{ suite.description }}</p>
+                <p class="mb-4">Nos suites dispose d’une décoration unique avec des équipements modernes répondant aux meilleures normes internationales.</p>
+                <p class="mb-4">Nos suites ont été pensés pour vous offrir un univers intime et chaleureux lors de vos séjours de courte ou longue durée.</p>
+                <h2 class="mb-4">ETAGE : <span class="text-primary text-uppercase">{{ suite.etage }}</span></h2>
+                <h2 class="mb-4">PRIX : <span class="text-primary text-uppercase">{{ suite.prix }}</span>$/Nuit</h2>
+
+                {% if request.session.user %}
+                    <button  type="submit" class="btn btn-primary"><a href="{% url 'paiement'%}">Réserver maintenant</a></button>
+                {% else %}
+                    <a href="{% url 'login'%}">Veuillez vous Connecter avant de poursuivre</a>
+                {% endif %}  
+                
+                
+            </div>
+
+            <div class="col-lg-5">
+                <img src="{{ suite.image.url }}" alt="{{ suite.nom_suite }}" class="img-fluid">
+                <!--img class="img-fluid" src="{{ resultat.image.url }}" alt="{{ resultat.nom_suite }}" style="margin-top: 30%;"-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+{% endblock %}
+      

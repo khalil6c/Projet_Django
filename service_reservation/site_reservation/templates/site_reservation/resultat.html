@@ -1,0 +1,84 @@
+{% extends './base.html'%}
+{% load static %}
+{% load i18n %}
+{% load tz %}
+{% block content %}
+
+
+
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center pb-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Suites</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Reservation de Chambres</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Chambres</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+
+<!-- Room Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Nos suites</h6>
+            <h1 class="mb-5">Nos suites <span class="text-primary text-uppercase">correspondants</span></h1>
+        </div>
+        <div class="row g-4">
+            {% if resultats %}
+                {% for resultat in resultats %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="room-item shadow rounded overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="{{ resultat.image.url }}" alt="{{ resultat.nom_suite }}">
+                                
+                            </div>
+                            <div class="p-4 mt-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5 class="mb-0">{{ resultat.nom_suite }}</h5>
+                                    <div class="ps-2">
+                                        {% for _ in resultat.rating %}
+                                            <small class="fa fa-star text-primary"></small>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{ resultat.nombre_lit }} Lit</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>{{ resultat.salle_bain }} Salle de bain</small>
+                                    {% if resultat.has_wifi %}
+                                        <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                    {% endif %}
+                                </div>
+                                <p class="text-body mb-3">{{ resultat.description }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <!--a class="btn btn-sm btn-primary rounded py-2 px-4" href="{% url 'detail'%}">Voir plus</a-->
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{% url 'detail' suite_id=resultat.id %}">Voir plus</a>
+
+                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="#">${{ resultat.prix }}/Nuit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                        </div><div class="row g-4">
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>Aucun résultat trouvé.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- Room End -->
+
+
+{% endblock %}
